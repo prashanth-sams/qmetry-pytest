@@ -1,4 +1,6 @@
-# QMetry PyTest
+# qmetry-pytest
+
+![PyPI](https://badge.fury.io/py/qmetry-pytest.svg)
 
 A PyTest plugin that provides seamless integration with QMetry Test Management Platform.
 
@@ -32,10 +34,8 @@ qmetry.automation.resultfile=<your_report_path/filename.xml/json>
 ## Test Example
 
 ```
-# test_example.py
 import pytest
 
-@pytest.mark.qid("TC-123")
 def test_example():
     assert True
 
@@ -50,7 +50,8 @@ def test_another_example():
 pytest --qmetry
 ```
 
-### Generate XML report before upload
+### To generate XML report before upload
+Ignore this if you run cucumber tests
 ```
 pytest --qmetry --junitxml=report/results.xml
 ```

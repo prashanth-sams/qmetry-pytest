@@ -55,7 +55,7 @@ class QMetryConfig:
 
         for testcase in root.findall(".//testcase"):
             scenario_name = testcase.get("name")
-            classname = testcase.get("classname", "Unknown Feature")
+            classname = testcase.get("classname")
 
             if testcase.find("failure") is not None:
                 status = "failed"
