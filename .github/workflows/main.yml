@@ -8,14 +8,14 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: cclauss/Find-Python-syntax-errors-action@master
 
   unit-test:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Dependencies
         run: |
           pip3 install -r requirements.txt
@@ -25,13 +25,13 @@ jobs:
           coveralls --service=github
           bash <(curl -s https://codecov.io/bash)
       - name: Unit Test Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: ./report/
           retention-days: 7
       - name: Coverage Report Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: ./coverage.xml
