@@ -8,12 +8,14 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: cclauss/Find-Python-syntax-errors-action@master
+
   unit-test:
     runs-on: ubuntu-latest
+    needs: lint
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Dependencies
         run: |
           pip3 install -r requirements.txt
