@@ -9,6 +9,8 @@ report/
 venv/
 .idea/
 /.pytest_cache/
+**/.pytest_cache/
 .DS_Store
 **/.DS_Store
 test.py
+.pypirc

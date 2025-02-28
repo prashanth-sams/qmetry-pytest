@@ -11,7 +11,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="qmetry-pytest",
-    version="1.0.0",
+    version="1.0.1",
     author="Prashanth Sams",
     author_email="sams.prashanth@gmail.com",
     maintainer="Prashanth Sams",
@@ -21,7 +21,7 @@ setup(
     description="A PyTest plugin that provides seamless integration with QMetry Test Management Platform.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    keywords=["qmetry", "qmetry pytest", "reporter", "report", "pytest", "py.test"],
+    keywords=["qmetry", "qmetry pytest", "reporter", "report", "pytest", "py.test", "jira", "cucumber", "xml"],
     packages=find_packages(),
     include_package_data=True,
     python_requires=">=3.10",
