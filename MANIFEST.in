@@ -1,0 +1,15 @@
+include LICENSE
+include README.rst
+
+prune tests/*
+prune venv/*
+
+exclude PKG-INFO
+exclude MANIFEST.in
+exclude setup.py
+exclude setup.cfg
+exclude requirements.txt
+exclude qmetry.properties
+
+prune *.egg-info
+global-exclude *.egg-info/*

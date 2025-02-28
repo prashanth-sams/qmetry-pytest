@@ -4,10 +4,10 @@ A PyTest plugin that provides seamless integration with QMetry Test Management P
 
 ## Features
 
-- Automatically upload test execution results to QMetry
-- Support for test case mapping and traceability
-- Detailed test execution reporting
-- Easy configuration through pytest.ini or command line arguments
+- Automatically uploads test results to QMetry
+- Generates test cycles and updates test case statuses seamlessly
+- Supports JUnit XML reports for Automation API
+- Supports Cucumber JSON reports for Automation API
 
 ## Installation
 
@@ -15,30 +15,18 @@ A PyTest plugin that provides seamless integration with QMetry Test Management P
 pip install qmetry-pytest
 ```
 
-## Basic Setup
-
-```
-# conftest.py
-from qmetry_pytest import QmetryPlugin
-
-def pytest_configure(config):
-    config.pluginmanager.register(QmetryPlugin())
-```
-
 ## Configuration
 
 You'll need to create a qmetry.properties file in your project root:
 ```
-automation.qmetry.enabled=true
-automation.qmetry.url=<your_qmetry_url>
-automation.qmetry.apikey=<your_api_key>
-automation.qmetry.testrunname=<test_run_name>
-automation.qmetry.labels=<labels>
-automation.qmetry.components=<components>
-automation.qmetry.version=<version>
-automation.qmetry.sprint=<sprint>
-automation.qmetry.platform=<platform>
-automation.qmetry.comment=<comment>
+qmetry.enabled=true
+qmetry.url=<your_qmetry_url>
+qmetry.authorization=<your_authorization>
+
+qmetry.automation.enabled=true
+qmetry.automation.apikey=<your_api_key>
+qmetry.automation.format=<junit/cucumber>
+qmetry.automation.resultfile=<your_report_path/filename.xml/json>
 ```
 
 ## Test Example
@@ -47,7 +35,7 @@ automation.qmetry.comment=<comment>
 # test_example.py
 import pytest
 
-@pytest.mark.qid("TC-123")  # QMetry Test Case ID
+@pytest.mark.qid("TC-123")
 def test_example():
     assert True
 
@@ -62,18 +50,13 @@ def test_another_example():
 pytest --qmetry
 ```
 
-## Key Features:
+### Generate XML report before upload
+```
+pytest --qmetry --junitxml=report/results.xml
+```
 
-- Automatically uploads test results to QMetry
-- Maps test cases with QMetry IDs
-- Supports test case status updates
-- Provides detailed test execution reports
-- Can include attachments and screenshots
+## Best Practices
 
-## Best Practices:
-
-- Always include unique QMetry IDs for each test case
-- Use meaningful test run names
-- Keep configuration updated
-- Handle authentication securely
-- Include relevant metadata (components, versions, etc.)
+- No markers are required for the automation flow.
+- Ensure secure authentication and keep the configuration updated in `qmetry.properties`.
+- Remember to include --qmetry as a command-line argument during test execution.
