@@ -161,7 +161,6 @@ class QMetryPytestPlugin:
         if qmetry_api.properties.get('qmetry.enabled') == 'false': return
 
         qmetry_plugin.create_test_execution()
-        qmetry_plugin.create_test_execution()
 
 
     def create_test_execution(self):
@@ -229,6 +228,20 @@ class QMetryPytestPlugin:
 
 
     def _automation_upload_file(self, url):
+        qmetry_config = QMetryConfig()
+
+        try:
+            response = requests.request("POST", url,
+                headers=qmetry_config.automation_file_upload_header(),
+                files=qmetry_config.automation_file_upload_payload()
+            )
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            print(f"Error creating Automation test execution: {e}")
+            print(e.response.text)
+
+
+    def _delete_automation_upload_file(self, url):
         qmetry_config = QMetryConfig()
 
         try:
