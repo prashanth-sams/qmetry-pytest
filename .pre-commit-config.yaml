@@ -2,9 +2,6 @@ ci:
   autofix_prs: true
   autoupdate_schedule: weekly
   submodules: false
-  # pip-compile requires internet, regenerate-files may get cache
-  # issues in CI, so they're run in check.sh
-  skip: [pip-compile, regenerate-files]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -49,34 +46,3 @@ repos:
     rev: v1.3.1
     hooks:
       - id: zizmor
-  - repo: local
-    hooks:
-      - id: regenerate-files
-        name: regenerate generated files
-        language: python
-        entry: python src/trio/_tools/gen_exports.py
-        pass_filenames: false
-        additional_dependencies: ["astor", "attrs", "black", "ruff"]
-        files: ^src\/trio\/_core\/(_run|(_i(o_(common|epoll|kqueue|windows)|nstrumentation)))\.py$
-  - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.6.2
-    hooks:
-      # Compile requirements
-      - id: pip-compile
-        name: uv pip-compile test-requirements.in
-        args: [
-          "--universal",
-          "--python-version=3.9",
-          "test-requirements.in",
-          "-o",
-          "test-requirements.txt"]
-        files: ^test-requirements\.(in|txt)$
-      - id: pip-compile
-        name: uv pip-compile docs-requirements.in
-        args: [
-          "--universal",
-          "--python-version=3.11",
-          "docs-requirements.in",
-          "-o",
-          "docs-requirements.txt"]
-        files: ^docs-requirements\.(in|txt)$
