@@ -14,4 +14,8 @@ coverage:
     behavior: default
     require_changes: true
   
-  heatmap: true
+  range: "50...100"
+  round: down
+  flag_management:
+    default_rules:
+      carryforward: true
