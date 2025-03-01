@@ -3,10 +3,9 @@ codecov:
     wait_for_ci: true
   require_ci_to_pass: true
 comment:
-  layout: "diff"
+  layout: "diff, flags, files"
   behavior: default
-  require_changes:
-  - 1
+  require_changes: false
   show_carryforward_flags: true
 coverage:
   precision: 3
