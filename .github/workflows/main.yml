@@ -1,6 +1,8 @@
 on:
   pull_request:
     branches: [ main ]
+  push:
+    branches: [ main ]
 name: CI
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
