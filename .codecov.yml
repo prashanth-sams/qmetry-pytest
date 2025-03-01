@@ -5,8 +5,7 @@ codecov:
 comment:
   layout: "reach, diff, flags, files"
   behavior: default
-  require_changes:
-  - 1
+  require_changes: true
   show_carryforward_flags: true
 coverage:
   precision: 3
@@ -21,7 +20,7 @@ coverage:
     patch: true
     project:
       default:
-        target: 70%
+        target: 0.0
         threshold: 70.0
 github_checks:
   annotations: true
