@@ -1,6 +1,7 @@
 codecov:
   notify:
     wait_for_ci: true
+    notify_error: true
   require_ci_to_pass: true
 comment:
   layout: "reach, diff, flags, files"
@@ -9,19 +10,19 @@ comment:
   - 1
   show_carryforward_flags: true
 coverage:
-  precision: 3
-  range:
-  - 60.0
-  - 80.0
+  precision: 5
+  range: 0..70
   round: down
   status:
-    changes: true
+    # changes: true
     default_rules:
       flag_coverage_not_uploaded_behavior: include
     patch: true
     project:
       default:
-        target: 0.0
-        threshold: 70.0
+        target: 70%
+    patch:
+      default:
+        target: 70%
 github_checks:
   annotations: true
