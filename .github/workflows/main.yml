@@ -58,7 +58,7 @@ jobs:
           name: coverage-report
           path: ./coverage.xml
           retention-days: 7
-  
+
   sast:
     name: SAST with CodeQL
     runs-on: ubuntu-latest
