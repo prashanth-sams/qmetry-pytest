@@ -10,6 +10,8 @@ coverage:
   precision: 3
 
   comment:
-  layout: "diff"
-  behavior: default
-  require_changes: true
+    layout: "diff"
+    behavior: default
+    require_changes: true
+  
+  heatmap: true
