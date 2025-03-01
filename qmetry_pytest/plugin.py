@@ -161,6 +161,7 @@ class QMetryPytestPlugin:
         if qmetry_api.properties.get('qmetry.enabled') == 'false': return
 
         qmetry_plugin.create_test_execution()
+        qmetry_plugin.create_test_execution()
 
 
     def create_test_execution(self):
