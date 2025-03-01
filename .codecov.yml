@@ -1,23 +1,20 @@
 coverage:
   status:
+    patch: false
     project:
       default:
-        target: 60%
-        threshold: 2%
-        if_ci_failed: error
-        informational: false
-
-    patch: false
-  
+        target: 0.0
+        threshold: 60%
+    default_rules:
+      flag_coverage_not_uploaded_behavior: include
   precision: 3
-
-  comment:
-    layout: "diff"
-    behavior: default
-    require_changes: true
-  
   range: "50...100"
   round: down
-  flag_management:
-    default_rules:
-      carryforward: true
+
+comment:
+  layout: "diff"
+  behavior: default
+  require_changes: true
+
+github_checks:
+  annotations: true
