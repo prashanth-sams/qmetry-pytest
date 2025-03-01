@@ -24,9 +24,8 @@ jobs:
           python3 -m pytest --cov-branch --cov-report=xml ./qmetry_pytest/ tests/unit/ --junitxml=junit.xml -o junit_family=legacy
           coveralls --service=github
           bash <(curl -s https://codecov.io/bash)
-      - name: Coverage Report Artifacts
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Unit Test Artifacts
