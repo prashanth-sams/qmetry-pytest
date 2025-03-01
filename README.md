@@ -1,4 +1,5 @@
 ![PyPI](https://badge.fury.io/py/qmetry-pytest.svg)
+![Downloads](https://pepy.tech/badge/qmetry-pytest)
 
 # qmetry-pytest
 A PyTest plugin that provides seamless integration with QMetry Test Management Platform.
