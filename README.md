@@ -1,4 +1,5 @@
 ![PyPI](https://badge.fury.io/py/qmetry-pytest.svg)
+[![Coverage Status](https://coveralls.io/repos/github/prashanth-sams/qmetry-pytest/badge.svg?branch=main)](https://coveralls.io/github/prashanth-sams/qmetry-pytest?branch=main)
 ![Downloads](https://pepy.tech/badge/qmetry-pytest)
 
 # qmetry-pytest
