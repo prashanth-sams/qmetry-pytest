@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import codecs
 from setuptools import setup, find_packages
 
 
@@ -21,7 +19,17 @@ setup(
     description="A PyTest plugin that provides seamless integration with QMetry Test Management Platform.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    keywords=["qmetry", "qmetry pytest", "reporter", "report", "pytest", "py.test", "jira", "cucumber", "xml"],
+    keywords=[
+        "qmetry",
+        "qmetry pytest",
+        "reporter",
+        "report",
+        "pytest",
+        "py.test",
+        "jira",
+        "cucumber",
+        "xml",
+    ],
     packages=find_packages(),
     include_package_data=True,
     python_requires=">=3.10",
@@ -37,5 +45,5 @@ setup(
         "pytest11": [
             "qmetry = qmetry_pytest.plugin:QMetryPytestPlugin",
         ],
-    }
+    },
 )
