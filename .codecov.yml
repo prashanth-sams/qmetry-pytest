@@ -14,7 +14,7 @@ coverage:
   range: 0..70
   round: down
   status:
-    # changes: true
+    changes: true
     default_rules:
       flag_coverage_not_uploaded_behavior: include
     patch: true
