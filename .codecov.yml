@@ -3,7 +3,7 @@ codecov:
     wait_for_ci: true
   require_ci_to_pass: true
 comment:
-  layout: "reach, diff, flags, files, footer, header, messages, project, sunburst, tree, changes, status, patch, functions, coverage, performance"
+  layout: "reach, diff, flags, files, footer, sunburst"
   behavior: default
   require_changes: true
   show_carryforward_flags: true
