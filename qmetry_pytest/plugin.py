@@ -168,7 +168,7 @@ class QMetryPytestPlugin:
             else:
                 pass
 
-        except Exception as NameError:
+        except Exception:
             pass
 
     @staticmethod
