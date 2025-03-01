@@ -22,8 +22,6 @@ jobs:
       - name: Run Tests
         run: |
           python3 -m pytest --cov ./qmetry_pytest/ tests/unit/ --junitxml=junit.xml -o junit_family=legacy
-          coveralls --service=github
-          bash <(curl -s https://codecov.io/bash)
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
@@ -34,9 +32,9 @@ jobs:
           name: test-results
           path: ./report/
           retention-days: 7
-      # - name: Coverage Report Artifacts
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: coverage-report
-      #     path: ./coverage.xml
-      #     retention-days: 7
+      - name: Coverage Report Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ./coverage.xml
+          retention-days: 7
