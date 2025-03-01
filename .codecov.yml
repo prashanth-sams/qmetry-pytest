@@ -15,7 +15,7 @@ coverage:
   - 80.0
   round: down
   status:
-    changes: false
+    changes: true
     default_rules:
       flag_coverage_not_uploaded_behavior: include
     patch: false
