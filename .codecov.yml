@@ -1,3 +1,13 @@
+codecov:
+  notify:
+    wait_for_ci: true
+  require_ci_to_pass: true
+comment:
+  layout: "diff"
+  behavior: default
+  require_changes:
+  - 1
+  show_carryforward_flags: true
 coverage:
   status:
     patch: false
@@ -11,10 +21,7 @@ coverage:
   range: "50...100"
   round: down
 
-comment:
-  layout: "diff"
-  behavior: default
-  require_changes: true
+
 
 github_checks:
   annotations: true
