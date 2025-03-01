@@ -3,52 +3,57 @@ import json
 import datetime
 import xml.etree.ElementTree as ET
 
+
 class QMetryConfig:
     def __init__(self):
         from .plugin import QMetryApi
-        
+
         self.config = QMetryApi()
         self.properties = self.config.properties
-        self.qmetry_url = self.properties.get('qmetry.url')
-        self.authorization = self.properties.get('qmetry.authorization')
+        self.qmetry_url = self.properties.get("qmetry.url")
+        self.authorization = self.properties.get("qmetry.authorization")
 
     def automation_import_result_header(self):
         return {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'apiKey': self.properties.get('qmetry.automation.apikey'),
-            'Authorization': self.authorization
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "apiKey": self.properties.get("qmetry.automation.apikey"),
+            "Authorization": self.authorization,
         }
-    
+
     def automation_import_result_payload(self):
-        return {
-            "format": 'cucumber',
-            "attachFile": True
-        }
-    
+        return {"format": "cucumber", "attachFile": True}
+
     def automation_file_upload_header(self):
         return {
-            'apiKey': self.properties.get('qmetry.automation.apikey'),
-            'Authorization': self.authorization
+            "apiKey": self.properties.get("qmetry.automation.apikey"),
+            "Authorization": self.authorization,
         }
 
     def automation_file_upload_payload(self):
-        file = self.properties.get('qmetry.automation.resultfile', '')
-        
-        if not file.endswith('.json'):
+        file = self.properties.get("qmetry.automation.resultfile", "")
+
+        if not file.endswith(".json"):
             self.junit_to_cucumber()
-            cucumber_json_file = file.replace('.xml', '.json')
+            cucumber_json_file = file.replace(".xml", ".json")
         else:
             cucumber_json_file = file
-        
+
         filename_with_extension = os.path.basename(cucumber_json_file)
 
         return [
-            ('file',(filename_with_extension,open(cucumber_json_file,'rb'),'application/json'))
+            (
+                "file",
+                (
+                    filename_with_extension,
+                    open(cucumber_json_file, "rb"),
+                    "application/json",
+                ),
+            )
         ]
 
     def junit_to_cucumber(self):
-        tree = ET.parse(self.properties.get('qmetry.automation.resultfile'))
+        tree = ET.parse(self.properties.get("qmetry.automation.resultfile"))
         root = tree.getroot()
 
         cucumber_results = []
@@ -67,20 +72,22 @@ class QMetryConfig:
                 status = "passed"
 
             feature = {
-                "elements": [{
-                    "id": f"features/{classname}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.feature",
-                    "keyword": "Scenario",
-                    "name": scenario_name,
-                    "steps": [{
-                        "keyword": "Given",
-                        "name": "",
-                        "result": {
-                            "status": status
-                        }
-                    }],
-                    "tags": [],
-                    "type": "scenario"
-                }],
+                "elements": [
+                    {
+                        "id": f"features/{classname}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.feature",
+                        "keyword": "Scenario",
+                        "name": scenario_name,
+                        "steps": [
+                            {
+                                "keyword": "Given",
+                                "name": "",
+                                "result": {"status": status},
+                            }
+                        ],
+                        "tags": [],
+                        "type": "scenario",
+                    }
+                ],
                 "id": f"features/{classname}.feature",
                 "keyword": "Feature",
                 "name": "feature name",
@@ -90,8 +97,9 @@ class QMetryConfig:
 
             cucumber_results.append(feature)
 
-
-        cucumber_json_file = self.properties.get('qmetry.automation.resultfile').replace('.xml', '.json')
+        cucumber_json_file = self.properties.get(
+            "qmetry.automation.resultfile"
+        ).replace(".xml", ".json")
 
         with open(cucumber_json_file, "w") as json_file:
             json.dump(cucumber_results, json_file, indent=2)
