@@ -23,7 +23,7 @@ jobs:
           pip3 install -r requirements.txt
       - name: Run Tests
         run: |
-          python3 -m pytest --cov ./qmetry_pytest/ tests/unit/ --junitxml=junit.xml -o junit_family=legacy
+          python3 -m pytest --cov --cov-branch --cov-report=xml ./qmetry_pytest/ tests/unit/ --junitxml=junit.xml -o junit_family=legacy
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
