@@ -2,10 +2,14 @@ coverage:
   status:
     project:
       default:
-        target: 50%
+        target: 60%
         threshold: 2%
-        base: main
-    patch:
-      default:
-        target: 50%
-        threshold: 2%
+
+    patch: false
+  
+  precision: 3
+
+  comment:
+  layout: "diff"
+  behavior: default
+  require_changes: true
