@@ -28,6 +28,10 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          name: codecov-report
+          fail_ci_if_error: true
+          verbose: true
       - name: Unit Test Artifacts
         uses: actions/upload-artifact@v4
         with:
