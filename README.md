@@ -1,6 +1,13 @@
-# QMetry PyTest
+![PyPI](https://badge.fury.io/py/qmetry-pytest.svg)
+[![Coverage Status](https://coveralls.io/repos/github/prashanth-sams/qmetry-pytest/badge.svg?branch=main)](https://coveralls.io/github/prashanth-sams/qmetry-pytest?branch=main)
+![Downloads](https://pepy.tech/badge/qmetry-pytest)
 
+# qmetry-pytest
 A PyTest plugin that provides seamless integration with QMetry Test Management Platform.
+
+<p align="center">
+  <img width="435" alt="qmetry" src="https://github.com/user-attachments/assets/ad22091b-df27-426f-8f05-cc5a7d6da80b" />
+</p>
 
 ## Features
 
@@ -32,10 +39,8 @@ qmetry.automation.resultfile=<your_report_path/filename.xml/json>
 ## Test Example
 
 ```
-# test_example.py
 import pytest
 
-@pytest.mark.qid("TC-123")
 def test_example():
     assert True
 
@@ -50,7 +55,10 @@ def test_another_example():
 pytest --qmetry
 ```
 
-### Generate XML report before upload
+### To generate XML report before upload
+
+Note: Skip this section if you are using the Cucumber framework
+
 ```
 pytest --qmetry --junitxml=report/results.xml
 ```
@@ -59,4 +67,4 @@ pytest --qmetry --junitxml=report/results.xml
 
 - No markers are required for the automation flow.
 - Ensure secure authentication and keep the configuration updated in `qmetry.properties`.
-- Remember to include --qmetry as a command-line argument during test execution.
+- Remember to include `--qmetry` as a command-line argument during test execution.

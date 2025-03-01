@@ -6,7 +6,7 @@ prune venv/*
 
 exclude PKG-INFO
 exclude MANIFEST.in
-exclude setup.cfg
+exclude conftest.py
 exclude requirements.txt
 exclude qmetry.properties
 
