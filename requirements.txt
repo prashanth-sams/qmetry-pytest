@@ -1,0 +1,6 @@
+pytest
+requests
+pytest-html-reporter
+pytest-cov
+coveralls
+twine

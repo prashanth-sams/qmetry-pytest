@@ -1,0 +1,26 @@
+codecov:
+  notify:
+    wait_for_ci: true
+  require_ci_to_pass: true
+comment:
+  layout: "reach, diff, flags, files, footer, sunburst"
+  behavior: default
+  require_changes: true
+  show_carryforward_flags: true
+coverage:
+  precision: 3
+  range:
+  - 70.0
+  - 80.0
+  round: down
+  status:
+    changes: true
+    default_rules:
+      flag_coverage_not_uploaded_behavior: include
+    patch: true
+    project:
+      default:
+        target: 0.0
+        threshold: 70.0
+github_checks:
+  annotations: true

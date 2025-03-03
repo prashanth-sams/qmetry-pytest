@@ -1,0 +1,16 @@
+*.egg-info
+# qmetry_pytest.egg-info/
+build/
+dist/
+*.pyc
+__pycache__/
+**/__pycache__/
+report/
+venv/
+.idea/
+/.pytest_cache/
+**/.pytest_cache/
+.DS_Store
+**/.DS_Store
+test.py
+.pypirc

@@ -1,0 +1,80 @@
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+name: CI
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+permissions:
+  contents: read
+  actions: write
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - uses: cclauss/Find-Python-syntax-errors-action@master
+
+  unit-test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Install Dependencies
+        run: |
+          pip3 install -r requirements.txt
+      - name: Run Tests
+        run: |
+          python3 -m pytest --cov --cov-branch --cov-report=xml ./qmetry_pytest/ tests/unit/ --junitxml=junit.xml -o junit_family=legacy
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          name: codecov-report
+          fail_ci_if_error: true
+          verbose: true
+      - name: Unit Test Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ./report/
+          retention-days: 7
+      - name: Coverage Report Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ./coverage.xml
+          retention-days: 7
+
+  sast:
+    name: SAST with CodeQL
+    runs-on: ubuntu-latest
+    needs: unit-test
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
