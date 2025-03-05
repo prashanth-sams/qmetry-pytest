@@ -24,7 +24,6 @@ class QMetryConfig:
     def automation_import_result_payload(self):
         payload = {
             "format": "cucumber",
-            # "attachFile": self.properties.get("qmetry.automation.payload.attachFile", "true").lower() == "true",
             "attachFile": self.properties.get("qmetry.automation.payload.attachFile", "true").lower() != "false",
             "isZip": self.properties.get("qmetry.automation.payload.isZip", "false").lower() == "true",
             "environment": self.properties.get("qmetry.automation.payload.environment", ""),
