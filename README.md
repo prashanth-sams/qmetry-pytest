@@ -24,18 +24,25 @@ pip install qmetry-pytest
 
 ## Configuration
 
-You'll need to create a qmetry.properties file in your project root:
+You'll need to create a qmetry.properties file in your project root.
+
+#### Default and Mandatory Properties:
 ```
 qmetry.enabled=true
 qmetry.url=<your_qmetry_url>
 qmetry.authorization=<your_authorization>
+```
 
+### Automation API
+
+#### Mandatory Properties:
+```
 qmetry.automation.enabled=true
 qmetry.automation.apikey=<your_api_key>
 qmetry.automation.resultfile=<your_report_path/filename.xml/json>
 ```
 
-Optional Automation API property list
+#### Optional Properties:
 ```
 qmetry.automation.payload.format=<junit/cucumber>
 qmetry.automation.payload.attachFile=true
