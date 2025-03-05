@@ -1,5 +1,5 @@
 [![PyPI version](https://badge.fury.io/py/qmetry-pytest.svg)](https://badge.fury.io/py/qmetry-pytest)
-[![codecov](https://codecov.io/gh/prashanth-sams/qmetry-pytest/graph/badge.svg?token=9NDOGETS6J)](https://codecov.io/gh/prashanth-sams/qmetry-pytest)
+[![codecov](https://codecov.io/github/prashanth-sams/qmetry-pytest/graph/badge.svg?token=WVRR4PU0VS)](https://codecov.io/github/prashanth-sams/qmetry-pytest)
 [![PyPI Downloads](https://static.pepy.tech/badge/qmetry-pytest)](https://pepy.tech/projects/qmetry-pytest)
 
 # qmetry-pytest
