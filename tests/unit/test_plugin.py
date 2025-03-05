@@ -74,12 +74,31 @@ def test_pytest_addoption():
 def test_pytest_configure():
     config = MagicMock()
     config.getoption.return_value = True
+
     with patch("qmetry_pytest.plugin.QMetryApi") as MockQMetryApi:
         mock_qmetry_api = MockQMetryApi.return_value
         mock_qmetry_api.properties = {"qmetry.enabled": "true"}
         mock_qmetry_api.validate_qmetry_config.return_value = (True, "automation", None)
+
         QMetryPytestPlugin.pytest_configure(config)
-        assert QMetryPytestPlugin.q is True
+
+        assert mock_qmetry_api.validate_qmetry_config.called
+
+
+def test_pytest_configure_without_qmetry():
+    config = MagicMock()
+    config.getoption.return_value = False
+
+    with patch("qmetry_pytest.plugin.QMetryApi") as MockQMetryApi:
+        mock_qmetry_api = MockQMetryApi.return_value
+        mock_qmetry_api.properties = {"qmetry.enabled": "true"}
+
+        QMetryPytestPlugin.pytest_configure(config)
+
+        # Assert that no validation was called
+        assert not mock_qmetry_api.validate_qmetry_config.called
+        # Check that no markers were added
+        assert not config.addinivalue_line.called
 
 
 @pytest.mark.skip

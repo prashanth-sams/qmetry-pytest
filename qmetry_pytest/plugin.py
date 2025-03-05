@@ -99,7 +99,6 @@ class QMetryApi:
 
 
 class QMetryPytestPlugin:
-    q = False
 
     def __init__(self):
         self.test_results = []
@@ -118,31 +117,22 @@ class QMetryPytestPlugin:
     @staticmethod
     @pytest.hookimpl(tryfirst=True)
     def pytest_configure(config):
-        QMetryPytestPlugin.q = config.getoption("qmetry")
-        if QMetryPytestPlugin.q is False:
-            return
-
+        qmetry_enabled = config.getoption("qmetry")
         qmetry_api = QMetryApi()
 
-        if qmetry_api.properties.get("qmetry.enabled") == "false":
-            return
+        if qmetry_enabled and qmetry_api.properties.get("qmetry.enabled") == "true":
+            global is_valid, flow_type, error_message
+            
+            is_valid, flow_type, error_message = qmetry_api.validate_qmetry_config()
+            if not is_valid:
+                raise ValueError(f"Invalid QMetry configuration: {error_message}")
 
-        global is_valid, flow_type, error_message
-        # Now properties will be available as an instance variable
-        is_valid, flow_type, error_message = qmetry_api.validate_qmetry_config()
-        if not is_valid:
-            raise ValueError(f"Invalid QMetry configuration: {error_message}")
-
-        if QMetryPytestPlugin().flow_type == "openapi":
-            config.addinivalue_line(
-                "markers", "qid(id): mark test with QMetry test case ID"
-            )
-
-    @pytest.fixture(autouse=True)
-    def reset_qmetry_plugin_state():
-        # QMetryPytestPlugin.q = False
-        yield
-        QMetryPytestPlugin.q = False
+            if QMetryPytestPlugin().flow_type == "openapi":
+                config.addinivalue_line(
+                    "markers", "qid(id): mark test with QMetry test case ID"
+                )
+        else:
+            print("QMetry integration is disabled. Skipping QMetry functionality.")
 
     @pytest.mark.hookwrapper
     def pytest_runtest_makereport(item, call):
@@ -179,16 +169,17 @@ class QMetryPytestPlugin:
 
     @staticmethod
     def pytest_sessionfinish(session):
-        qmetry_plugin = QMetryPytestPlugin()
-
-        if qmetry_plugin.q is False:
-            return
-
+        qmetry_enabled = session.config.getoption("qmetry")
         qmetry_api = QMetryApi()
-        if qmetry_api.properties.get("qmetry.enabled") == "false":
-            return
 
-        qmetry_plugin.create_test_execution()
+        if qmetry_enabled and qmetry_api.properties.get("qmetry.enabled") == "true":
+
+            if qmetry_api.properties.get("qmetry.automation.enabled") == "true" or \
+                qmetry_api.properties.get("qmetry.openapi.enabled") == "true":
+                try:
+                    QMetryPytestPlugin().create_test_execution()
+                except Exception as e:
+                    print(f"Error during QMetry test execution creation: {e}")
 
     def create_test_execution(self):
         """
