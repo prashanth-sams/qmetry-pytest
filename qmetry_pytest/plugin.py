@@ -262,3 +262,18 @@ class QMetryPytestPlugin:
         except requests.exceptions.RequestException as e:
             print(f"Error creating Automation test execution: {e}")
             print(e.response.text)
+
+    def dummy_automation_upload_file(self, url):
+        qmetry_config = QMetryConfig()
+
+        try:
+            response = requests.request(
+                "POST",
+                url,
+                headers=qmetry_config.automation_file_upload_header(),
+                files=qmetry_config.automation_file_upload_payload(),
+            )
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            print(f"Error creating Automation test execution: {e}")
+            print(e.response.text)
