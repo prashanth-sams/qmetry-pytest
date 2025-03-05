@@ -140,7 +140,7 @@ class QMetryPytestPlugin:
 
     @pytest.fixture(autouse=True)
     def reset_qmetry_plugin_state():
-        QMetryPytestPlugin.q = False
+        # QMetryPytestPlugin.q = False
         yield
         QMetryPytestPlugin.q = False
 
