@@ -32,7 +32,7 @@ setup(
     ],
     packages=find_packages(),
     include_package_data=True,
-    python_requires=">=3.10",
+    python_requires=">=3.5",
     install_requires=["pytest", "requests"],
     classifiers=[
         "Framework :: Pytest",

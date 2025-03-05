@@ -1,12 +1,12 @@
 [![PyPI version](https://badge.fury.io/py/qmetry-pytest.svg)](https://badge.fury.io/py/qmetry-pytest)
-[![codecov](https://codecov.io/gh/prashanth-sams/qmetry-pytest/graph/badge.svg?token=9NDOGETS6J)](https://codecov.io/gh/prashanth-sams/qmetry-pytest)
+[![codecov](https://codecov.io/github/prashanth-sams/qmetry-pytest/graph/badge.svg?token=WVRR4PU0VS)](https://codecov.io/github/prashanth-sams/qmetry-pytest)
 [![PyPI Downloads](https://static.pepy.tech/badge/qmetry-pytest)](https://pepy.tech/projects/qmetry-pytest)
 
 # qmetry-pytest
 A PyTest plugin that provides seamless integration with QMetry Test Management Platform.
 
-<p align="center">
-  <img width="435" alt="qmetry" src="https://github.com/user-attachments/assets/ad22091b-df27-426f-8f05-cc5a7d6da80b" />
+<p align="left">
+  <img width="435" alt="qmetry" src="https://github.com/user-attachments/assets/452a8748-7987-4443-b6d0-d43a7b72b96d" />
 </p>
 
 ## Features
