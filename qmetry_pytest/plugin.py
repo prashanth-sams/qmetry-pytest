@@ -138,6 +138,12 @@ class QMetryPytestPlugin:
                 "markers", "qid(id): mark test with QMetry test case ID"
             )
 
+    @pytest.fixture(autouse=True)
+    def reset_qmetry_plugin_state():
+        QMetryPytestPlugin.q = False
+        yield
+        QMetryPytestPlugin.q = False
+
     @pytest.mark.hookwrapper
     def pytest_runtest_makereport(item, call):
         outcome = yield
