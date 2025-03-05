@@ -24,26 +24,48 @@ class QMetryConfig:
     def automation_import_result_payload(self):
         payload = {
             "format": "cucumber",
-            "attachFile": self.properties.get("qmetry.automation.payload.attachFile", "true").lower() != "false",
-            "isZip": self.properties.get("qmetry.automation.payload.isZip", "false").lower() == "true",
-            "environment": self.properties.get("qmetry.automation.payload.environment", ""),
+            "attachFile": self.properties.get(
+                "qmetry.automation.payload.attachFile", "true"
+            ).lower()
+            != "false",
+            "isZip": self.properties.get(
+                "qmetry.automation.payload.isZip", "false"
+            ).lower()
+            == "true",
+            "environment": self.properties.get(
+                "qmetry.automation.payload.environment", ""
+            ),
             "build": self.properties.get("qmetry.automation.payload.build", ""),
-
             "fields": {
                 "testCycle": {
-                    "labels": self.properties.get("qmetry.automation.payload.fields.testCycle.labels", "").split(","),
-                    "status": self.properties.get("qmetry.automation.payload.fields.testCycle.status", ""),
-                    "summary": self.properties.get("qmetry.automation.payload.fields.testCycle.summary", ""),
-                    "customFields": self.build_custom_fields(self.properties.get("qmetry.automation.payload.fields.testCycle.customFields", "")),
+                    "labels": self.properties.get(
+                        "qmetry.automation.payload.fields.testCycle.labels", ""
+                    ).split(","),
+                    "status": self.properties.get(
+                        "qmetry.automation.payload.fields.testCycle.status", ""
+                    ),
+                    "summary": self.properties.get(
+                        "qmetry.automation.payload.fields.testCycle.summary", ""
+                    ),
+                    "customFields": self.build_custom_fields(
+                        self.properties.get(
+                            "qmetry.automation.payload.fields.testCycle.customFields",
+                            "",
+                        )
+                    ),
                 },
                 "testCase": {
-                    "labels": self.properties.get("qmetry.automation.payload.fields.testCase.labels", "").split(","),
-                    "status": self.properties.get("qmetry.automation.payload.fields.testCase.status", ""),
-                }
-            }
+                    "labels": self.properties.get(
+                        "qmetry.automation.payload.fields.testCase.labels", ""
+                    ).split(","),
+                    "status": self.properties.get(
+                        "qmetry.automation.payload.fields.testCase.status", ""
+                    ),
+                },
+            },
         }
         return payload
-    
+
     def build_custom_fields(self, custom_fields_str):
         custom_fields = []
         if custom_fields_str:

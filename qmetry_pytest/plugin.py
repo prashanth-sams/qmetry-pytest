@@ -122,7 +122,7 @@ class QMetryPytestPlugin:
 
         if qmetry_enabled and qmetry_api.properties.get("qmetry.enabled") == "true":
             global is_valid, flow_type, error_message
-            
+
             is_valid, flow_type, error_message = qmetry_api.validate_qmetry_config()
             if not is_valid:
                 raise ValueError(f"Invalid QMetry configuration: {error_message}")
@@ -174,8 +174,10 @@ class QMetryPytestPlugin:
 
         if qmetry_enabled and qmetry_api.properties.get("qmetry.enabled") == "true":
 
-            if qmetry_api.properties.get("qmetry.automation.enabled") == "true" or \
-                qmetry_api.properties.get("qmetry.openapi.enabled") == "true":
+            if (
+                qmetry_api.properties.get("qmetry.automation.enabled") == "true"
+                or qmetry_api.properties.get("qmetry.openapi.enabled") == "true"
+            ):
                 try:
                     QMetryPytestPlugin().create_test_execution()
                 except Exception as e:
